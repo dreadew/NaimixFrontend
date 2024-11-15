@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	font-family: 'Inter', serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+}
+
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 0 0% 0%;
+
+		--accent: 0 0% 80%;
+		--accent-foreground: 0 0% 60%;
+
+		--destructive: 11 88% 57%;
+		--destructive-foreground: 11 88% 88%;
+
+		--muted: 0 0% 51%;
+		--muted-foreground: 0 0% 31%;
+
+		--secondary: 32 100% 58%;
+		--secondary-foreground: 32 100% 98%;
+
+		--primary: 180 76% 23%;
+		--primary-foreground: 180 76% 98%;
+
+		--radius: 0.45rem;
+	}
+}
+
+@layer base {
+	body {
+		@apply bg-background text-foreground;
+	}
+}
