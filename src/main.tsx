@@ -7,7 +7,6 @@ import { MainPage } from './components/pages/MainPage.tsx'
 import { SignInPage } from './components/pages/SignInPage.tsx'
 import { SignUpPage } from './components/pages/SignUpPage.tsx'
 import { TestPage } from './components/pages/TestPage.tsx'
-import { RequireAuth } from './components/RequireAuth.tsx'
 import {
 	DashboardPageLink,
 	MainPageLink,
@@ -24,11 +23,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: DashboardPageLink,
-		element: (
-			<RequireAuth>
-				<DashboardPage />
-			</RequireAuth>
-		),
+		element: <DashboardPage />,
 		errorElement: <ErrorPage />,
 	},
 	{

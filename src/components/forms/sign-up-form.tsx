@@ -9,12 +9,14 @@ import { Button } from '../ui/button'
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '../ui/form'
 import { Input, PasswordInput } from '../ui/input'
+import { RadioGroup, RadioGroupItem } from '../ui/radioGroup'
 
 const formSchema = z.object({
 	name: z.string().min(2, { message: 'Длина имени должна быть >= 2 символов' }),
@@ -28,6 +30,7 @@ const formSchema = z.object({
 		.max(11, {
 			message: 'Длина номера телефона должна быть ровно 11 символов',
 		}),
+	roleId: z.string().min(1).max(1),
 	password: z
 		.string()
 		.min(4, { message: 'Длина пароля должна быть >= 4 символов' })
@@ -43,6 +46,7 @@ export const SignUpForm = () => {
 			surname: '',
 			patronymic: '',
 			phoneNumber: '',
+			roleId: '1',
 			password: '',
 		},
 	})
@@ -138,6 +142,47 @@ export const SignUpForm = () => {
 										placeholder='Номер телефона'
 										{...field}
 									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name='roleId'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Выберите свою роль</FormLabel>
+								<FormControl>
+									<RadioGroup
+										onValueChange={field.onChange}
+										defaultValue={field.value}
+									>
+										<div className='flex items-center gap-2'>
+											<FormItem className='w-full flex items-center gap-4 p-3 rounded-md border border-accent'>
+												<FormControl>
+													<RadioGroupItem value='1' />
+												</FormControl>
+												<div className='flex flex-col gap-1'>
+													<FormLabel>Рекрутер</FormLabel>
+													<FormDescription>
+														Описание роли рекрутера...
+													</FormDescription>
+												</div>
+											</FormItem>
+											<FormItem className='w-full flex items-center gap-4 p-3 rounded-md border border-accent'>
+												<FormControl>
+													<RadioGroupItem value='2' />
+												</FormControl>
+												<div className='flex flex-col gap-1'>
+													<FormLabel>Работник</FormLabel>
+													<FormDescription>
+														Описание роли работника...
+													</FormDescription>
+												</div>
+											</FormItem>
+										</div>
+									</RadioGroup>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
