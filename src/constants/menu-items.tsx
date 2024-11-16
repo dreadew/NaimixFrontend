@@ -1,29 +1,20 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react'
+import { Diff, SquareUser, Users } from 'lucide-react'
+import { AboutPageLink, CandidatePageLink, ComparePageLink } from './links'
 
 export const items = [
 	{
-		title: 'Home',
-		url: '#',
-		icon: Home,
+		title: 'Обо мне',
+		url: AboutPageLink,
+		icon: SquareUser,
 	},
 	{
-		title: 'Inbox',
-		url: '#',
-		icon: Inbox,
+		title: 'Кандидаты',
+		url: CandidatePageLink,
+		icon: Users,
 	},
 	{
-		title: 'Calendar',
-		url: '#',
-		icon: Calendar,
-	},
-	{
-		title: 'Search',
-		url: '#',
-		icon: Search,
-	},
-	{
-		title: 'Settings',
-		url: '#',
-		icon: Settings,
+		title: 'Сравнение',
+		url: ComparePageLink,
+		icon: Diff,
 	},
 ]

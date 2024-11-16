@@ -6,8 +6,8 @@ import { z } from 'zod'
 import { AccessTokenCookie, RefreshTokenCookie } from '../../constants/cookies'
 import { SignUpPageLink } from '../../constants/links'
 import { isProblemDetailsError } from '../../lib/checkError'
+import authService from '../../services/auth.service'
 import { SetCookie } from '../../services/cookies.service'
-import userService from '../../services/user.service'
 import { useAuthStore } from '../../stores/authStore'
 import { Button } from '../ui/button'
 import {
@@ -47,7 +47,7 @@ export const SignInForm = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsLoading(true)
 		try {
-			const { data } = await userService.Login(values)
+			const { data } = await authService.Login(values)
 
 			SetCookie(AccessTokenCookie, data.accessToken)
 			SetCookie(RefreshTokenCookie, data.refreshToken)

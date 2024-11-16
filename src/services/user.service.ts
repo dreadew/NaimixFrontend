@@ -1,20 +1,33 @@
 import { axiosInstance } from '../api/axios'
-import { TokenDto } from '../types/token.types'
-import { CreateUserDto, LoginUserDto, UserDto } from '../types/user.types'
+import { FavoritesDto, UserInfoDto } from '../types/user.types'
 
 class UserService {
 	private URL = import.meta.env.VITE_USER_API_URL + '/user'
 
-	async Login(data: LoginUserDto) {
-		return axiosInstance.post<TokenDto>(this.URL, data)
+	async GetUsersByRole(roleId: string) {
+		return axiosInstance.get<UserInfoDto[]>(this.URL + `/roles/${roleId}`)
 	}
 
-	async Register(data: CreateUserDto) {
-		return axiosInstance.post<UserDto>(this.URL, data)
+	async GetMyProfile(id: string) {
+		return axiosInstance.get<UserInfoDto>(this.URL + `/${id}`)
 	}
 
-	async Test() {
-		return axiosInstance.get(this.URL)
+	async AddUsersToFavorites(dto: FavoritesDto) {
+		return axiosInstance.get<UserInfoDto>(
+			this.URL +
+				'/favorites/add' +
+				`?mainUserId=${dto.mainUserId}` +
+				`&favoritesUsersIds=${dto.favoriteUsersIds}`
+		)
+	}
+
+	async DeleteUsersFromFavorites(dto: FavoritesDto) {
+		return axiosInstance.get<UserInfoDto>(
+			this.URL +
+				'/favorites/delete' +
+				`?mainUserId=${dto.mainUserId}` +
+				`&favoritesUsersIds=${dto.favoriteUsersIds}`
+		)
 	}
 }
 

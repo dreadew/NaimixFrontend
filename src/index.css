@@ -27,16 +27,16 @@ body {
 @layer base {
 	:root {
 		--background: 0 0% 100%;
-		--foreground: 0 0% 0%;
+		--foreground: 240 10% 3.9%;
 
-		--accent: 0 0% 80%;
-		--accent-foreground: 0 0% 60%;
+		--accent: 240 4.8% 95.9%;
+		--accent-foreground: 240 5.9% 10%;
 
 		--destructive: 11 88% 57%;
 		--destructive-foreground: 11 88% 88%;
 
-		--muted: 0 0% 51%;
-		--muted-foreground: 0 0% 31%;
+		--muted: 240 4.8% 95.9%;
+		--muted-foreground: 240 3.8% 46.1%;
 
 		--secondary: 32 100% 58%;
 		--secondary-foreground: 32 100% 98%;
@@ -44,14 +44,16 @@ body {
 		--primary: 180 76% 23%;
 		--primary-foreground: 180 76% 98%;
 
-		--sidebar-background: 0 0% 100%;
-		--sidebar-foreground: 0 0% 0%;
+		--sidebar-background: 0 0% 99%;
+		--sidebar-foreground: 240 5.3% 26.1%;
 		--sidebar-primary: 180 76% 23%;
 		--sidebar-primary-foreground: 180 76% 98%;
-		--sidebar-accent: 0 0% 80%;
-		--sidebar-accent-foreground: 0 0% 60%;
-		--sidebar-border: 0 0% 80%;
-		--sidebar-ring: 0 0% 80%;
+		--sidebar-accent: 240 4.8% 95.9%;
+		--sidebar-accent-foreground: 240 5.9% 10%;
+		--sidebar-border: 240 5.9% 90%;
+		--sidebar-ring: 240 5.9% 10%;
+
+		--input: 240 5.9% 90%;
 
 		--radius: 0.45rem;
 	}

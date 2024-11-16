@@ -9,7 +9,7 @@ export const H4 = ({ children, className }: Props) => {
 	return (
 		<h4
 			className={cn(
-				'scroll-m-20 text-xl font-semibold tracking-tight text-foreground',
+				'text-lg font-semibold tracking-tight text-foreground',
 				className
 			)}
 		>

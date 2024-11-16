@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z } from 'zod'
 import { SignInPageLink } from '../../constants/links'
-import userService from '../../services/user.service'
+import authService from '../../services/auth.service'
 import { Button } from '../ui/button'
 import {
 	Form,
@@ -54,7 +54,7 @@ export const SignUpForm = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsLoading(true)
 		try {
-			await userService.Register(values)
+			await authService.Register(values)
 		} catch (err: unknown) {
 			console.error(err)
 		} finally {
@@ -159,7 +159,7 @@ export const SignUpForm = () => {
 										defaultValue={field.value}
 									>
 										<div className='flex items-center gap-2'>
-											<FormItem className='w-full flex items-center gap-4 p-3 rounded-md border border-accent'>
+											<FormItem className='w-full flex items-center gap-4 p-3 rounded-xl border border-accent'>
 												<FormControl>
 													<RadioGroupItem value='1' />
 												</FormControl>
@@ -170,7 +170,7 @@ export const SignUpForm = () => {
 													</FormDescription>
 												</div>
 											</FormItem>
-											<FormItem className='w-full flex items-center gap-4 p-3 rounded-md border border-accent'>
+											<FormItem className='w-full flex items-center gap-4 p-3 rounded-xl border border-accent'>
 												<FormControl>
 													<RadioGroupItem value='2' />
 												</FormControl>

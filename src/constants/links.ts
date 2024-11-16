@@ -1,6 +1,15 @@
 const MainPageLink = '/'
-const DashboardPageLink = '/dashboard'
+const CandidatePageLink = '/candidate'
+const ComparePageLink = '/compare'
+const AboutPageLink = '/about-me'
 const SignInPageLink = '/sign-in'
 const SignUpPageLink = '/sign-up'
 
-export { DashboardPageLink, MainPageLink, SignInPageLink, SignUpPageLink }
+export {
+	AboutPageLink,
+	CandidatePageLink,
+	ComparePageLink,
+	MainPageLink,
+	SignInPageLink,
+	SignUpPageLink,
+}

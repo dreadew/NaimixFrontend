@@ -1,7 +1,3 @@
-export type UserDto = {
-	id: string
-}
-
 export type UserInfoDto = {
 	id: string
 	name: string
@@ -11,15 +7,7 @@ export type UserInfoDto = {
 	role: string
 }
 
-export type LoginUserDto = {
-	phoneNumber: string
-	password: string
-}
-
-export type CreateUserDto = {
-	name: string
-	surname: string
-	patronymic: string
-	phoneNumber: string
-	password: string
+export type FavoritesDto = {
+	mainUserId: string
+	favoriteUsersIds: string[]
 }

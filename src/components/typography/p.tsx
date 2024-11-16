@@ -7,12 +7,7 @@ type Props = {
 
 export const P = ({ children, className }: Props) => {
 	return (
-		<p
-			className={cn(
-				'leading-7 text-md text-accent-foreground font-medium',
-				className
-			)}
-		>
+		<p className={cn('text-sm text-muted-foreground font-medium', className)}>
 			{children}
 		</p>
 	)
