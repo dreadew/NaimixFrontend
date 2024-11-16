@@ -12,5 +12,9 @@ export type CreateUserDto = {
 	surname: string
 	patronymic: string
 	phoneNumber: string
+	roleId: string
+	dateBirth: string
+	telegramLink: string
 	password: string
+	positionId?: string
 }

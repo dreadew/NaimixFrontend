@@ -24,7 +24,7 @@ import {
 } from './ui/sidebar'
 
 export const DashboardSidebar = () => {
-	const { logout } = useAuthStore()
+	const { name, logout } = useAuthStore()
 	const location = useLocation()
 
 	const handleLogout = async () => {
@@ -67,12 +67,13 @@ export const DashboardSidebar = () => {
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<SidebarMenuButton>
-									<User2 /> Имя пользователя
+									<User2 /> {name}
 									<ChevronUp className='ml-auto' />
 								</SidebarMenuButton>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent
 								side='top'
+								align='start'
 								className='w-[--radix-popper-anchor-width]'
 							>
 								<DropdownMenuItem onClick={handleLogout}>

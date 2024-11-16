@@ -1,5 +1,10 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios'
-import { GetAccessToken, ValidateToken } from '../services/cookies.service'
+import {
+	GetAccessToken,
+	RemoveAccessToken,
+	RemoveRefreshToken,
+	ValidateToken,
+} from '../services/cookies.service'
 import { ApiError, ProblemDetailsError } from '../types/error.types'
 
 const options: CreateAxiosDefaults = {
@@ -17,6 +22,8 @@ axiosInstance.interceptors.request.use(
 		if (accessToken) {
 			const accessTokenIsValid = await ValidateToken(accessToken)
 			if (!accessTokenIsValid) {
+				RemoveAccessToken()
+				RemoveRefreshToken()
 				throw new Error('Некорректный Access Token')
 			}
 

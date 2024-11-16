@@ -29,7 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 				{type === 'password' && setState && typeof state !== 'undefined' && (
 					<Button
 						className={cn(
-							'absolute right-0 top-1/2 -translate-y-1/2 h-full rounded-r-md rounded-l-none',
+							'absolute right-0 top-1/2 -translate-y-1/2 h-full rounded-r-xl rounded-l-none',
 							error && 'bg-destructive border-destructive text-destructive'
 						)}
 						variant={'outline'}

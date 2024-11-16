@@ -7,7 +7,7 @@ import { ComparePage } from './components/pages/ComparePage.tsx'
 import { ErrorPage } from './components/pages/ErrorPage.tsx'
 import { SignInPage } from './components/pages/SignInPage.tsx'
 import { SignUpPage } from './components/pages/SignUpPage.tsx'
-import { TestPage } from './components/pages/TestPage.tsx'
+import { RequireAuth } from './components/RequireAuth.tsx'
 import {
 	AboutPageLink,
 	CandidatePageLink,
@@ -26,17 +26,29 @@ const router = createBrowserRouter([
 	},
 	{
 		path: CandidatePageLink,
-		element: <CandidatePage />,
+		element: (
+			<RequireAuth>
+				<CandidatePage />
+			</RequireAuth>
+		),
 		errorElement: <ErrorPage />,
 	},
 	{
 		path: ComparePageLink,
-		element: <ComparePage />,
+		element: (
+			<RequireAuth>
+				<ComparePage />
+			</RequireAuth>
+		),
 		errorElement: <ErrorPage />,
 	},
 	{
 		path: AboutPageLink,
-		element: <AboutPage />,
+		element: (
+			<RequireAuth>
+				<AboutPage />
+			</RequireAuth>
+		),
 		errorElement: <ErrorPage />,
 	},
 	{
@@ -48,10 +60,6 @@ const router = createBrowserRouter([
 		path: SignUpPageLink,
 		element: <SignUpPage />,
 		errorElement: <ErrorPage />,
-	},
-	{
-		path: '/test',
-		element: <TestPage />,
 	},
 ])
 

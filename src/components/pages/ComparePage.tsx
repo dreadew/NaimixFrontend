@@ -1,7 +1,8 @@
-import { CompareCandidatesTable } from '../CompareCandidatesTable'
+import { cn } from '../../lib/utils'
+import { CompareCandidates } from '../CompareCandidates'
+import { CompareList } from '../CompareList'
+import { Container } from '../Container'
 import { DashboardWrapper } from '../DashboardWrapper'
-import { H2 } from '../typography/h2'
-import { Button } from '../ui/button'
 
 export const ComparePage = () => {
 	const candidates = [
@@ -19,30 +20,15 @@ export const ComparePage = () => {
 			position: 'Должность',
 			favorite: true,
 		},
-		{
-			id: '2',
-			name: 'Иванов И.И.',
-			department: 'Отдел',
-			position: 'Должность',
-			favorite: false,
-		},
-		{
-			id: '3',
-			name: 'Иванов И.И.',
-			department: 'Отдел',
-			position: 'Должность',
-			favorite: false,
-		},
 	]
 	return (
-		<DashboardWrapper className='flex-col gap-6'>
-			<section className='bg-white'>
-				<div className='flex items-center justify-between gap-2'>
-					<H2>Сравнение кандидатов</H2>
-					<Button variant={'secondary'}>Рассчитать совместимость</Button>
-				</div>
-				<CompareCandidatesTable candidates={candidates} />
-			</section>
+		<DashboardWrapper className='w-full flex flex-col gap-6'>
+			<Container className={cn('h-full w-full bg-white rounded-3xl')}>
+				<CompareList candidates={candidates} />
+			</Container>
+			<Container className={cn('h-full w-full bg-white rounded-3xl')}>
+				<CompareCandidates candidates={candidates} />
+			</Container>
 		</DashboardWrapper>
 	)
 }

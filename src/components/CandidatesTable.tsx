@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
+import { CandidateInfo } from '../types/user.types'
 import { CandidateActionsDropdown } from './CandidateActionsDropdown'
 import { CandidatesSearch } from './CandidatesSearch'
 import { FavoriteCandidateIcon } from './FavoriteCandidateIcon'
@@ -14,18 +15,17 @@ import {
 } from './ui/table'
 
 type Props = {
-	candidates: {
-		id: string
-		name: string
-		department: string
-		position: string
-		favorite: boolean
-	}[]
+	candidates: CandidateInfo[]
 }
 
 export const CandidatesTable = ({ candidates }: Props) => {
 	const [localCandidates, setLocalCandidates] = useState(candidates)
-	const [currCandidates, setCurrCandidates] = useState<string[]>([])
+	const [currCandidates, setCurrCandidates] = useState<
+		{
+			id: string
+			favorite: boolean
+		}[]
+	>([])
 	const [value, setValue] = useState<string>('')
 	const debouncedValue = useDebounce(value, 1000)
 
@@ -73,19 +73,26 @@ export const CandidatesTable = ({ candidates }: Props) => {
 									<Checkbox
 										onCheckedChange={e => {
 											if (e) {
-												setCurrCandidates(prev => [...prev, item.id])
+												setCurrCandidates(prev => [
+													...prev,
+													{ id: item.id, favorite: item.isFavorite },
+												])
 												return
 											}
-											setCurrCandidates(prev => prev.filter(c => c !== item.id))
+											setCurrCandidates(prev =>
+												prev.filter(c => c.id !== item.id)
+											)
 										}}
 										className='mr-4'
 									/>
-									<FavoriteCandidateIcon isFavorite={item.favorite} />
+									<FavoriteCandidateIcon isFavorite={item.isFavorite} />
 								</span>
 							</TableCell>
-							<TableCell>{item.name}</TableCell>
-							<TableCell>{item.department}</TableCell>
-							<TableCell>{item.position}</TableCell>
+							<TableCell>
+								{item.surname + ' ' + item.name + ' ' + item.patronymic}
+							</TableCell>
+							<TableCell>{item.department ?? 'Отсутствует'}</TableCell>
+							<TableCell>{item.position ?? 'Отсутствует'}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

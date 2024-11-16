@@ -20,6 +20,10 @@ function RequireAuth({ children }: Props) {
 		getAuthorizationStatus()
 	}, [])
 
+	if (isAuthorized === null) {
+		return
+	}
+
 	return isAuthorized ? children : <Navigate to={SignInPageLink} replace />
 }
 

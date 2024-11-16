@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { AccessTokenCookie, RefreshTokenCookie } from '../../constants/cookies'
-import { SignUpPageLink } from '../../constants/links'
+import { AboutPageLink, SignUpPageLink } from '../../constants/links'
 import { isProblemDetailsError } from '../../lib/checkError'
 import authService from '../../services/auth.service'
 import { SetCookie } from '../../services/cookies.service'
@@ -43,15 +43,18 @@ export const SignInForm = () => {
 			password: '',
 		},
 	})
+	const navigate = useNavigate()
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsLoading(true)
 		try {
 			const { data } = await authService.Login(values)
 
-			SetCookie(AccessTokenCookie, data.accessToken)
-			SetCookie(RefreshTokenCookie, data.refreshToken)
-			login(data)
+			SetCookie(AccessTokenCookie, data.data.accessToken)
+			SetCookie(RefreshTokenCookie, data.data.refreshToken)
+			login(data.data)
+
+			navigate(AboutPageLink)
 		} catch (err: unknown) {
 			if (isProblemDetailsError(err)) {
 				console.error(err.detail)
