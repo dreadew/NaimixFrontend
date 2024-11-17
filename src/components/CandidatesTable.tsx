@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { CandidatePageLink } from '../constants/links'
 import { useDebounce } from '../hooks/useDebounce'
 import { CandidateInfo } from '../types/user.types'
 import { CandidateActionsDropdown } from './CandidateActionsDropdown'
@@ -89,7 +91,9 @@ export const CandidatesTable = ({ candidates }: Props) => {
 								</span>
 							</TableCell>
 							<TableCell>
-								{item.surname + ' ' + item.name + ' ' + item.patronymic}
+								<Link to={CandidatePageLink + '/' + item.id}>
+									{item.surname + ' ' + item.name + ' ' + item.patronymic}
+								</Link>
 							</TableCell>
 							<TableCell>{item.department ?? 'Отсутствует'}</TableCell>
 							<TableCell>{item.position ?? 'Отсутствует'}</TableCell>

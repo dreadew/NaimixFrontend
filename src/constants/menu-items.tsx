@@ -1,5 +1,10 @@
-import { Diff, SquareUser, Users } from 'lucide-react'
-import { AboutPageLink, CandidatePageLink, ComparePageLink } from './links'
+import { Building2, Diff, SquareUser, Users } from 'lucide-react'
+import {
+	AboutPageLink,
+	CandidatePageLink,
+	CompanyPageLink,
+	ComparePageLink,
+} from './links'
 
 export const items = [
 	{
@@ -16,5 +21,10 @@ export const items = [
 		title: 'Сравнение',
 		url: ComparePageLink,
 		icon: Diff,
+	},
+	{
+		title: 'Компания',
+		url: CompanyPageLink,
+		icon: Building2,
 	},
 ]

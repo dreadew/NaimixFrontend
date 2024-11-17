@@ -15,7 +15,10 @@ export const CandidatePage = () => {
 		const fetchCandidates = async () => {
 			try {
 				const { data } = await userService.GetUsersByRole('2', id!)
-				setCandidates(data.data)
+				const info = data.data
+				console.log(data)
+				info.sort((a, b) => Number(b.isFavorite) - Number(a.isFavorite))
+				setCandidates(info)
 			} catch (err: unknown) {
 				console.error(err)
 			}
@@ -24,7 +27,7 @@ export const CandidatePage = () => {
 	}, [])
 
 	return (
-		<DashboardWrapper className='h-[calc(100vh_-_3rem)]'>
+		<DashboardWrapper className='flex-col gap-6 h-[calc(100vh_-_3rem)]'>
 			<Container
 				className={cn('h-full w-full bg-white rounded-3xl flex flex-col gap-6')}
 			>

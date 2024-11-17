@@ -1,3 +1,4 @@
+import { CandidateInfo } from '../types/user.types'
 import { FavoriteCandidateIcon } from './FavoriteCandidateIcon'
 import {
 	Table,
@@ -9,13 +10,7 @@ import {
 } from './ui/table'
 
 type Props = {
-	candidates: {
-		id: string
-		name: string
-		department: string
-		position: string
-		favorite: boolean
-	}[]
+	candidates: CandidateInfo[]
 }
 
 export const CompareCandidatesTable = ({ candidates }: Props) => {
@@ -35,12 +30,12 @@ export const CompareCandidatesTable = ({ candidates }: Props) => {
 						<TableRow className='h-14' key={`candidate-${idx}`}>
 							<TableCell>
 								<span className='flex items-center'>
-									<FavoriteCandidateIcon isFavorite={item.favorite} />
+									<FavoriteCandidateIcon isFavorite={item.isFavorite} />
 								</span>
 							</TableCell>
 							<TableCell>{item.name}</TableCell>
-							<TableCell>{item.department}</TableCell>
-							<TableCell>{item.position}</TableCell>
+							<TableCell>{item.department ?? 'Не указан'}</TableCell>
+							<TableCell>{item.position ?? 'Не указана'}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

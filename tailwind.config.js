@@ -11,10 +11,12 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
+					text: 'hsl(var(--primary-text))',
 					foreground: 'hsl(var(--primary-foreground))',
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
+					text: 'hsl(var(--secondary-text))',
 					foreground: 'hsl(var(--secondary-foreground))',
 				},
 				muted: {

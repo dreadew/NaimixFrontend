@@ -1,7 +1,7 @@
 import { Info } from 'lucide-react'
 import { Recommendations } from '../constants/recommendations'
 import { Button } from './ui/button'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from './ui/dialog'
 import {
 	Table,
 	TableBody,
@@ -15,12 +15,13 @@ export const RecommendationsDialog = () => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant={'link'} className='text-secondary'>
+				<Button variant={'link'} className='p-0 text-secondary'>
 					<Info />
-					<span className='ml-2'>Инструкция по прочтению</span>
+					<span className='ml-2'>Инструкция по прочтению аналитики</span>
 				</Button>
 			</DialogTrigger>
 			<DialogContent>
+				<DialogTitle>Инструкция по прочтению аналитики</DialogTitle>
 				<Table>
 					<TableHeader>
 						<TableRow>

@@ -9,7 +9,8 @@ export type UserInfoDto = {
 	telegramLink: string
 	role: string
 	skills: SkillsInfoDto[]
-	position: PositionDto | null
+	position: string
+	department: string
 }
 
 export type CandidateInfo = {
@@ -17,6 +18,7 @@ export type CandidateInfo = {
 	name: string
 	surname: string
 	patronymic: string
+	dateBirth: string
 	isFavorite: boolean
 	position: string | null
 	department: string | null
@@ -25,21 +27,6 @@ export type CandidateInfo = {
 export type SkillsInfoDto = {
 	id: string
 	title: string
-}
-
-export type DepartmentDto = {
-	id: string
-	title: string
-	createdAt: string
-	updatedAt?: string
-}
-
-export type PositionDto = {
-	id: string
-	title: string
-	department: DepartmentDto
-	createdAt: string
-	updatedAt?: string
 }
 
 export type UpdateUserDto = {

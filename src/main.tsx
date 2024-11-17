@@ -2,7 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { AboutPage } from './components/pages/AboutPage.tsx'
+import { CandidateInfoPage } from './components/pages/CandidateInfoPage.tsx'
 import { CandidatePage } from './components/pages/CandidatePage.tsx'
+import { CompanyPage } from './components/pages/CompanyPage.tsx'
 import { ComparePage } from './components/pages/ComparePage.tsx'
 import { ErrorPage } from './components/pages/ErrorPage.tsx'
 import { SignInPage } from './components/pages/SignInPage.tsx'
@@ -11,6 +13,7 @@ import { RequireAuth } from './components/RequireAuth.tsx'
 import {
 	AboutPageLink,
 	CandidatePageLink,
+	CompanyPageLink,
 	ComparePageLink,
 	MainPageLink,
 	SignInPageLink,
@@ -43,10 +46,28 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 	},
 	{
+		path: CompanyPageLink,
+		element: (
+			<RequireAuth>
+				<CompanyPage />
+			</RequireAuth>
+		),
+		errorElement: <ErrorPage />,
+	},
+	{
 		path: AboutPageLink,
 		element: (
 			<RequireAuth>
 				<AboutPage />
+			</RequireAuth>
+		),
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: 'candidate/:id',
+		element: (
+			<RequireAuth>
+				<CandidateInfoPage />
 			</RequireAuth>
 		),
 		errorElement: <ErrorPage />,

@@ -39,9 +39,11 @@ body {
 		--muted-foreground: 240 3.8% 46.1%;
 
 		--secondary: 32 100% 58%;
+		--secondary-text: 32 100% 48%;
 		--secondary-foreground: 32 100% 98%;
 
 		--primary: 180 76% 23%;
+		--primary-text: 180 76% 18%;
 		--primary-foreground: 180 76% 98%;
 
 		--sidebar-background: 0 0% 99%;
