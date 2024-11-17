@@ -135,7 +135,11 @@ export const AboutSkills = ({ skills, editable = true }: AboutSkillsProps) => {
 			<div className='flex flex-wrap gap-2'>
 				{skills.length > 0 ? (
 					skills.map((item, idx) => (
-						<Skill skill={item} key={`candidate-skill-${idx}`} />
+						<Skill
+							skill={item}
+							key={`candidate-skill-${idx}`}
+							editable={editable}
+						/>
 					))
 				) : (
 					<Empty>

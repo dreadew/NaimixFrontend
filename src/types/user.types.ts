@@ -22,6 +22,7 @@ export type CandidateInfo = {
 	isFavorite: boolean
 	position: string | null
 	department: string | null
+	skills: string[]
 }
 
 export type SkillsInfoDto = {

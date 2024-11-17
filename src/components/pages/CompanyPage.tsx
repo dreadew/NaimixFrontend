@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { SignInPageLink } from '../../constants/links'
 import { cn } from '../../lib/utils'
 import userService from '../../services/user.service'
 import { useAuthStore } from '../../stores/authStore'
 import { DepartmentDto } from '../../types/department.types'
-import { UserInfoDto } from '../../types/user.types'
 import { Container } from '../Container'
 import { CreateDepartmentDialog } from '../CreateDepartmentDialog'
 import { CreatePositionDialog } from '../CreatePositionDialog'
@@ -20,27 +17,22 @@ import { UpdatePositionDialog } from '../UpdatePositionDialog'
 
 export const CompanyPage = () => {
 	const { id } = useAuthStore()
-	const [userInfo, setUserInfo] = useState<UserInfoDto | null>(null)
-	const navigate = useNavigate()
+	const [departments, setDepartments] = useState<DepartmentDto[] | null>(null)
 
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchDepartmentsData = async () => {
 			try {
-				const { data } = await userService.GetMyProfile(id!)
-				setUserInfo(data.data)
+				const { data } = await userService.GetAllDepartments()
+				setDepartments(data.data)
 			} catch (err: unknown) {
 				console.error(err)
 			}
 		}
 
 		if (id) {
-			fetchData()
+			fetchDepartmentsData()
 		}
 	}, [id])
-
-	if (!userInfo) {
-		navigate(SignInPageLink)
-	}
 
 	return (
 		<DashboardWrapper className='flex-col gap-6 h-[calc(100vh_-_3rem)]'>
@@ -51,35 +43,24 @@ export const CompanyPage = () => {
 			>
 				<H3>Информация о компании</H3>
 
-				<DepartmentList />
-				<PositionList />
+				<DepartmentList departments={departments} />
+				<PositionList departments={departments} />
 			</Container>
 		</DashboardWrapper>
 	)
 }
 
-export const DepartmentList = () => {
-	const [departments, setDepartments] = useState<DepartmentDto[]>([])
+type Props = {
+	departments: DepartmentDto[] | null
+}
 
-	useEffect(() => {
-		const fetchDepartments = async () => {
-			try {
-				const { data } = await userService.GetAllDepartments()
-				setDepartments(data.data)
-			} catch (err: unknown) {
-				console.error(err)
-			}
-		}
-
-		fetchDepartments()
-	}, [])
-
+export const DepartmentList = ({ departments }: Props) => {
 	return (
 		<div className='flex flex-col gap-4'>
 			<H4>Список отделов</H4>
 			<ul className='flex flex-col gap-2'>
-				{departments.length > 0 ? (
-					departments.map((item, idx) => (
+				{departments && departments.length > 0 ? (
+					departments?.map((item, idx) => (
 						<DepartmentItem
 							id={item.id}
 							title={item.title}
@@ -114,7 +95,11 @@ export const DepartmentItem = ({ id, title }: DepartmentItemProps) => {
 	)
 }
 
-export const PositionList = () => {
+type PositionProps = {
+	departments: DepartmentDto[] | null
+}
+
+export const PositionList = ({ departments }: PositionProps) => {
 	const [positions, setPositions] = useState<DepartmentDto[]>([])
 
 	useEffect(() => {
@@ -148,7 +133,7 @@ export const PositionList = () => {
 					</Empty>
 				)}
 			</ul>
-			<CreatePositionDialog />
+			<CreatePositionDialog departments={departments} />
 		</div>
 	)
 }

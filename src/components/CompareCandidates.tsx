@@ -54,11 +54,13 @@ export const CompareCandidates = ({
 					full_name:
 						person1.surname + ' ' + person1.name + ' ' + person1.patronymic,
 					birth_date: person1.dateBirth,
+					skills: person1.skills,
 				},
 				person2: {
 					full_name:
 						person2.surname + ' ' + person2.name + ' ' + person2.patronymic,
 					birth_date: person2.dateBirth,
+					skills: person2.skills,
 				},
 			})
 

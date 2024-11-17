@@ -1,11 +1,22 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Check, ChevronsUpDown } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { isProblemDetailsError } from '../../lib/checkError'
+import { cn } from '../../lib/utils'
 import userService from '../../services/user.service'
 import { useAuthStore } from '../../stores/authStore'
+import { DepartmentDto } from '../../types/department.types'
 import { Button } from '../ui/button'
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from '../ui/command'
 import {
 	Form,
 	FormControl,
@@ -15,6 +26,7 @@ import {
 	FormMessage,
 } from '../ui/form'
 import { PhoneInput } from '../ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 const formSchema = z.object({
 	id: z.string(),
@@ -22,7 +34,11 @@ const formSchema = z.object({
 	title: z.string(),
 })
 
-export const CreatePositionForm = () => {
+type Props = {
+	departments: DepartmentDto[] | null
+}
+
+export const CreatePositionForm = ({ departments }: Props) => {
 	const { id } = useAuthStore()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -63,17 +79,59 @@ export const CreatePositionForm = () => {
 						control={form.control}
 						name='departmentId'
 						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Id отдела</FormLabel>
-								<FormControl>
-									<PhoneInput
-										disabled={isLoading}
-										autoFocus
-										error={form.formState.errors?.departmentId?.message}
-										placeholder='Id отдела'
-										{...field}
-									/>
-								</FormControl>
+							<FormItem className='flex flex-col gap-1'>
+								<FormLabel>Отдел</FormLabel>
+								<Popover>
+									<PopoverTrigger asChild>
+										<FormControl>
+											<Button
+												variant={'outline'}
+												role='combobox'
+												className={cn(
+													'justify-between active:scale-100',
+													!field.value && 'text-muted-foreground'
+												)}
+											>
+												{field.value
+													? departments?.find(p => p.id === field.value)?.title
+													: 'Выберите отдел'}
+												<ChevronsUpDown className='opacity-50' />
+											</Button>
+										</FormControl>
+									</PopoverTrigger>
+									<PopoverContent align='start'>
+										<Command>
+											<CommandInput
+												placeholder='Поиск должности...'
+												className='h-9'
+											/>
+											<CommandList>
+												<CommandEmpty>Должность не найдена</CommandEmpty>
+												<CommandGroup>
+													{departments?.map(p => (
+														<CommandItem
+															value={p.id}
+															key={p.id}
+															onSelect={() => {
+																form.setValue('departmentId', p.id)
+															}}
+														>
+															{p.title}{' '}
+															<Check
+																className={cn(
+																	'ml-auto',
+																	p.title === field.value
+																		? 'opacity-100'
+																		: 'opactiy-0'
+																)}
+															/>
+														</CommandItem>
+													))}
+												</CommandGroup>
+											</CommandList>
+										</Command>
+									</PopoverContent>
+								</Popover>
 								<FormMessage />
 							</FormItem>
 						)}

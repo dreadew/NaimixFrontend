@@ -35,8 +35,8 @@ export const DashboardSidebar = () => {
 	return (
 		<Sidebar collapsible='icon'>
 			<SidebarHeader className='mt-2'>
-				<SidebarTrigger>
-					<Logo className='h-8 w-8' />
+				<SidebarTrigger className='ml-1'>
+					<Logo className='h-12 w-12' />
 				</SidebarTrigger>
 			</SidebarHeader>
 			<SidebarContent>

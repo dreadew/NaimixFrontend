@@ -1,6 +1,7 @@
 export type PersonInfo = {
 	full_name: string
 	birth_date: string
+	skills?: string[]
 }
 
 export type TwoPeopleCompatibilityRequest = {
